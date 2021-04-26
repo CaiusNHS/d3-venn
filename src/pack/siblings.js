@@ -1,4 +1,4 @@
-import array from "../array.js";
+import array from "./array.js";
 import enclose from "./enclose.js";
 
 function place(b, a, c) {
