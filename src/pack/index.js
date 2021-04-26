@@ -1,9 +1,77 @@
 import {packEnclose} from "./siblings.js";
 import {optional} from "./accessors.js";
 import constant, {constantZero} from "./constant.js";
+import d3 from "d3";
 
 function defaultRadius(d) {
     return Math.sqrt(d.value);
+}
+
+function setsAccessorFn(d) {
+    return d.set || [];
+}
+
+function extractSets(data) {
+    let sets = d3.map({}, function(d) {
+            return d.__key__
+        }),
+        individualSets = d3.map(),
+        accessor = setsAccessorFn(),
+        size = (size) => {
+            return size;
+        },
+        set,
+        s,
+        key,
+        i,
+        n = data.length;
+
+    for (i = -1; ++i < n;) {
+        set = accessor(data[i]);
+        if (set.length) {
+            key = set.sort().join(','); //so taht we have the same key as in https://github.com/benfred/venn.js
+            set.forEach(function(val) {
+                if (s = individualSets.get(val)) {
+                    s.size += 1;
+                    // s.nodes.push([data[i]]);
+
+                } else {
+                    individualSets.set(val, {
+                        __key__: val,
+                        size: 1,
+                        sets: [val],
+                        nodes: []
+                        // nodes: [data[i]]
+                    })
+                }
+            });
+            data[i].__setKey__ = key;
+            if (s = sets.get(key)) {
+                s.size++;
+                s.nodes.push(data[i]);
+            } else {
+                sets.set(key, {
+                    __key__: key,
+                    sets: set,
+                    size: 1,
+                    nodes: [data[i]]
+                });
+            }
+        }
+
+    }
+    individualSets.forEach(function(k, v) {
+        if (!sets.get(k)) {
+            sets.set(k, v);
+        }
+    });
+    // reset the size for each set.
+    sets.forEach(function(k, v) {
+        v.size = size(v.size);
+    });
+    // sets = sets.values();
+
+    return sets;
 }
 
 export default function() {
@@ -13,6 +81,11 @@ export default function() {
         padding = constantZero;
 
     function pack(root) {
+
+        const sets = extractSets(data);
+        console.log(sets);
+        return root;
+
         root.x = dx / 2, root.y = dy / 2;
         if (radius) {
             root.eachBefore(radiusLeaf(radius))
