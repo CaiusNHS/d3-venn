@@ -82,7 +82,7 @@ export default function() {
 
     function pack(root) {
 
-        const sets = extractSets(data);
+        const sets = extractSets(root);
         console.log(sets);
         return root;
 
