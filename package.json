@@ -34,6 +34,7 @@
     "webpack-cli": "^4.6.0"
   },
   "dependencies": {
+    "d3": "^6.7.0",
     "dist": "^0.1.2",
     "venn.js": "~0.2.4"
   }

@@ -21,7 +21,7 @@ import {
   distance
 }
 from "../venn.js/src/circleintersection.js"
-
+import d3 from 'd3';
 
 // export default function() {
   d3.layout.venn = function() {

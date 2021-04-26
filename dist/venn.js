@@ -1,9 +1,13 @@
 // https://github.com/christophe-g/d3-venn v1.0.1 Copyright 2021 Caius Eugene
 (function (global, factory) {
-typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-typeof define === 'function' && define.amd ? define(['exports'], factory) :
-(global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.d3 = global.d3 || {}));
-}(this, (function (exports) { 'use strict';
+typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3')) :
+typeof define === 'function' && define.amd ? define(['exports', 'd3'], factory) :
+(global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.d3 = global.d3 || {}, global.d3$1));
+}(this, (function (exports, d3$1) { 'use strict';
+
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var d3__default = /*#__PURE__*/_interopDefaultLegacy(d3$1);
 
 /**
  * getSet creates a getter/setter function for a re-usable D3.js component. 
@@ -1864,7 +1868,7 @@ function intersectionAreaPath(circles) {
 }
 
 // export default function() {
-  d3.layout.venn = function() {
+  d3__default['default'].layout.venn = function() {
 
     var opts = {
       sets: null,
@@ -2039,10 +2043,10 @@ function intersectionAreaPath(circles) {
         ];
     */
     function extractSets(data) {
-      var sets = d3.map({}, function(d) {
+      var sets = d3__default['default'].map({}, function(d) {
             return d.__key__
           }),
-          individualSets = d3.map(),
+          individualSets = d3__default['default'].map(),
           accessor = venn$1.setsAccessor(),
           size = venn$1.setsSize(),
           set,
