@@ -1868,7 +1868,7 @@ function intersectionAreaPath(circles) {
 }
 
 // export default function() {
-  d3__default['default'].layout.venn = function() {
+  d3__default['default'].venn = function() {
 
     var opts = {
       sets: null,
