@@ -1,7 +1,7 @@
 {
-  "name": "d3-venn",
-  "version": "0.0.9",
-  "description": "a Venn Layout plugin for d3.js",
+  "name": "my-webpack-project",
+  "version": "1.0.0",
+  "description": "My webpack project",
   "keywords": [
     "d3",
     "venn",
@@ -18,15 +18,26 @@
   "scripts": {
     "pretest": "mkdir -p build && node -e 'process.stdout.write(\"var version = \\\"\" + require(\"./package.json\").version + \"\\\"; export * from \\\"../index\\\"; export {version};\");' > build/bundle.js && rollup -f umd -u d3-venn -n d3_venn -o build/d3-venn.js -- build/bundle.js && cat ./end.js >> build/d3-venn.js",
     "test": "faucet `find test -name '*-test.js'`",
-    "prepublish": "npm run test && uglifyjs build/d3-venn.js --drop_console true -c -m -o build/d3-venn.min.js && rm -f build/d3-venn.zip && zip -j build/d3-venn.zip -- LICENSE  README.md build/d3-venn.js build/d3-venn.min.js"
+    "prepublish": "npm run test && uglifyjs build/d3-venn.js --drop_console true -c -m -o build/d3-venn.min.js && rm -f build/d3-venn.zip && zip -j build/d3-venn.zip -- LICENSE  README.md build/d3-venn.js build/d3-venn.min.js",
+    "build": "webpack --mode=production",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production",
+    "watch": "webpack --watch"
   },
   "devDependencies": {
-    "faucet": "0.0",
+    "@babel/core": "^7.13.16",
+    "@babel/preset-env": "^7.13.15",
+    "@webpack-cli/generators": "^2.0.0",
+    "babel-loader": "^8.2.2",
+    "faucet": "0.0.1",
     "rollup": "0.20.5",
     "tape": "4",
-    "uglify-js": "2"
+    "uglify-js": "2",
+    "webpack": "^5.35.1",
+    "webpack-cli": "^4.6.0"
   },
   "dependencies": {
+    "dist": "^0.1.2",
     "venn.js": "~0.2.4"
   }
 }
