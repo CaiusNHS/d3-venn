@@ -8,6 +8,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'venn.js',
         library: 'venn',
+        libraryTarget: 'umd',
     },
     plugins: [
         // Add your plugins here
